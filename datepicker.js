@@ -79,7 +79,7 @@
             $("body").append("<iframe class=\"datepicker_iframe\" scrolling=\"no\" style=\"position:absolute;display:none;border:0;left:50px;top:100px;width:205px;height:203px\"></iframe>");
             datepicker_iframe = $(".datepicker_iframe");
             setTimeout(function () {
-                datepicker_iframe.contents().find("head").html("<link type=\"text/css\" href=\"" + css_src + "\" rel=\"stylesheet\" />");
+                datepicker_iframe.contents().find("head").html("<link href=\"" + css_src + "\" rel=\"stylesheet\" />");
             }, 100);  //ff iframe中加载css需要延迟
             $(document).click(function (event) {
                 var srcElement = $(event.target);
