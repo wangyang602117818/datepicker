@@ -1,0 +1,74 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <script src="jquery-3.1.1.min.js"></script>
+    <script src="datepicker.js" datepicker-template="datepicker-template.html" datepicker-css="datepicker-orange.css"></script>
+    <style>
+        .datepicker {
+            background: url(date-orange.png) no-repeat;
+            background-position: right;
+            padding-right: 0;
+            padding: 4px 8px;
+            border: 1px solid #ccc;
+            border-radius: 2px;
+            color: #333;
+            outline: none;
+        }
+
+            .datepicker:focus {
+                border-color: #51A7E8;
+                background-color: #fff;
+                box-shadow: 0 0 5px rgba(103, 166, 217, 0.5);
+            }
+    </style>
+</head>
+<body>
+    特点: <br />
+    使用iframe,无样式冲突<br />
+    通过 script 标签的属性来指向template和css文件<br />
+    支持格式种类："yyyy-MM-dd","yyyy/MM/dd","yyyy.MM.dd","dd Month yyyy"
+
+    <br />
+    <br />
+    1. 基本用法:&nbsp;
+    <input type="text" class="datepicker" />&nbsp;&nbsp;
+    <br />
+    <br />
+    2. 开启时间:&nbsp;
+    <input type="text" class="datepicker" date-use-format="yyyy-MM-dd hh:mm:ss" />&nbsp;&nbsp;
+    <input type="text" class="datepicker" date-show-format="yyyy/MM/dd hh:mm:ss" />&nbsp;&nbsp;
+    <input type="text" class="datepicker" date-use-format="yyyy-MM-dd hh:mm:ss" date-show-format="dd Month yyyy hh:mm:ss" />&nbsp;&nbsp;
+    <br />
+    <br />
+    3. 给定初始值:&nbsp;
+    <input type="text" class="datepicker" date-val="2017-03-06 13:05:30" />
+    <br />
+    <br />
+    4. 双击选取时间:&nbsp;
+    <input type="text" class="datepicker" date-use-format="yyyy-MM-dd hh:mm:ss" date-dblclick />
+    <br />
+    <br />
+    5. 多语言:&nbsp;
+    <input type="text" class="datepicker" date-lang="zh-cn" />&nbsp;&nbsp;
+    <input type="text" class="datepicker" date-lang="en-us" />&nbsp;&nbsp;
+    <br /><br>
+    6. 限定选取范围:&nbsp;
+    <input type="text" class="datepicker" date-start="2017-03-01 00:00:00" date-end="2020-03-01 00:00:00" />
+    <br />
+    <br />
+    7. 皮肤: &nbsp;修改 script标签的 datepicker-css 的指向(datepicker-orange.css|datepicker-cyan.css),并且修改 .datepicker 的样式
+    <br />
+    <br />
+    8. 初始化: &nbsp;当整个input都是通过js输出到界面上，这时候控件不会生效。需要手动调用js方法<br />
+    <pre>
+        $(function () {
+           // $("#txt1").datepicker();    //单个的调用
+           datepicker();                  //一起调用
+        }); 
+    </pre>
+
+    <br />
+</body>
+</html>

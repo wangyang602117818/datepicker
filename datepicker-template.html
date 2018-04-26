@@ -1,0 +1,130 @@
+﻿<div class="datepicker">
+    <div class="datepicker_title_containter">
+        <div class="datepicker_last_year">
+            <span class="last_year" title="<%=model.commonlang[model.defaults.lang].title[1]%>">
+                <i class="left_icon"></i><i class="left_icon"></i>
+            </span>
+        </div>
+        <div class="datepicker_last_month">
+            <span class="last_month" title="<%=model.commonlang[model.defaults.lang].title[4]%>">
+                <i class="left_icon"></i>
+            </span>
+        </div>
+        <div class="datepicker_title_date">
+            <%if(model.defaults.lang=="en-us"){%>
+            <span class="title_month"><%=model.commonlang[model.defaults.lang].month[model.curr_time_arr[1]]%></span>
+            <span class="title_year"><%=model.curr_time_arr[0]%></span>
+            <%}else{%>
+            <span class=title_year><%=model.curr_time_arr[0]%><%=model.commonlang[model.defaults.lang].title[0]%></span>
+            <span class=title_month><%=model.monthFormat(model.curr_time_arr[1]+1,2)%><%=model.commonlang[model.defaults.lang].title[3]%></span>
+            <%}%>
+        </div>
+        <div class="datepicker_next_month">
+            <span class="next_month" title="<%=model.commonlang[model.defaults.lang].title[5]%>">
+                <i class="right_icon"></i>
+            </span>
+        </div>
+        <div class="datepicker_next_year">
+            <span class="next_year" title="<%=model.commonlang[model.defaults.lang].title[2]%>">
+                <i class="right_icon"></i><i class="right_icon"></i>
+            </span>
+        </div>
+    </div>
+    <div class="datepicker_maindata_containter">
+        <div class="datepicker_week_container">
+            <div class="datepicker_week">
+                <%for(var i = 0;i < model.commonlang[model.defaults.lang].week.length; i++){%>
+                <div><%=model.commonlang[model.defaults.lang].week[i]%></div>
+                <%}%>
+            </div>
+        </div>
+        <!--data_containter_start-->
+        <div class="datepicker_data_containter" flag="1">
+            <%for(var i = 0;i < model.getMonthDays(model.curr_time_arr[0],model.curr_time_arr[1]).first_day_week; i++ ){%>
+            <span></span>
+            <%}%>
+            <%
+            for(var i = 1; i <= model.getMonthDays(model.curr_time_arr[0],model.curr_time_arr[1]).days; i++){
+            var selcss = "tag_day";
+            if (model.isDateDay(i)) selcss += " day";
+            if (model.isWeekend(i)) selcss += " weekend";
+            if (model.isDateToday(i)) selcss += " today";
+            if (model.isDayDisabled(i)) selcss = " disabled";
+            %>
+            <div class="<%=selcss%>"><%=i%></div>
+            <%}%>
+        </div>
+        <!--data_containter_end-->
+    </div>
+    <!--year_containter_start-->
+    <div class="datepicker_year_layer" flag="0">
+        <%
+        for(var i = model.start_disp_year; i < model.start_disp_year + 16; i++){
+        var cssText = "tag_year";
+        if (i == model.curr_time_arr[0]) cssText += " currItem";
+        var disabled = false;
+        if (i < model.start_time_arr[0] || i > model.end_time_arr[0]) disabled = true;
+        if (disabled) cssText = "disabled";
+        %>
+        <div class="<%=cssText%>"><%=i%></div>
+        <%}%>
+    </div>
+    <!--year_containter_end-->
+    <!--month_containter_start-->
+    <div class="datepicker_month_layer" flag="0">
+        <%
+        for(var i = 0; i < model.commonlang[model.defaults.lang].month.length;i++){
+        var cssText = "tag_month";
+        if (i == model.curr_time_arr[1]) cssText += " currItem";
+        var disabled = false;
+        var months = Number(model.curr_time_arr[0]) * 12 + i,
+        startmonths = Number(model.start_time_arr[0]) * 12 + Number(model.start_time_arr[1]),
+        endmonths = Number(model.end_time_arr[0]) * 12 + Number(model.end_time_arr[1]);
+        if (months < startmonths || months > endmonths) disabled = true;
+        if (disabled) cssText = " disabled";
+        %>
+        <div class="<%=cssText%>"><%=model.commonlang[model.defaults.lang].month[i]%></div>
+        <%}%>
+    </div>
+    <!--month_containter_end-->
+    <!--hover_containter_start-->
+    <div class="datepicker_hover_layer" flag="0">
+        <%
+        for(var i = 0; i <= 23; i++){
+        var cssText = "tag_hover";
+        if (i == model.curr_time_arr[3]) cssText += " currItem";
+        %>
+        <div class="<%=cssText%>"><%=model.monthFormat(i,2)%></div>
+        <%}%>
+    </div>
+    <!--hover_containter_end-->
+    <!--minute_containter_start-->
+    <div class="datepicker_minute_layer" flag="0">
+        <%
+        for(var i = 0; i <= 55; i+=5){
+        var cssText = "tag_minute";
+        if (i == model.curr_time_arr[4]) cssText += " currItem";
+        %>
+        <div class="<%=cssText%>"><%=model.monthFormat(i,2)%></div>
+        <%}%>
+    </div>
+    <!--minute_containter_end-->
+    <!--second_containter_start-->
+    <div class="datepicker_second_layer" flag="0">
+        <%
+        for(var i = 0; i <= 55; i+=5){
+        var cssText = "tag_second";
+        if (i == model.curr_time_arr[5]) cssText += " currItem";
+        %>
+        <div class="<%=cssText%>"><%=model.monthFormat(i,2)%></div>
+        <%}%>
+    </div>
+    <!--second_containter_end-->
+    <%if(model.has_time){%>
+    <div class="datepicker_time_containter">
+        <span id="hover_txt"><input type="text" class="time_txt hour" value="<%=model.monthFormat(model.curr_time_arr[3],2)%>" maxlength="2"></span>:
+        <span id="minute_txt"><input type="text" class="time_txt minute" value="<%=model.monthFormat(model.curr_time_arr[4],2)%>" maxlength="2"></span>:
+        <span id="second_txt"><input type="text" class="time_txt second" value="<%=model.monthFormat(model.curr_time_arr[5],2)%>" maxlength="2"></span>
+    </div>
+    <%}%>
+</div>
