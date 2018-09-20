@@ -343,6 +343,7 @@
         that.val(showdate);
         that.attr("date-val", usedate);
         that.removeClass("datepicker-error-format");
+        that.focus();
     }
     //显示年份div
     function showYearLayer() {
