@@ -340,10 +340,8 @@
         }
         var usedate = dateFormat(curr_time_arr, model.defaults.useFormat);
         var showdate = dateFormat(curr_time_arr, model.defaults.showFormat);
-        that.val(showdate);
-        that.attr("date-val", usedate);
-        that.removeClass("datepicker-error-format");
-        that.focus();
+        that.val(showdate).change();
+        that.attr("date-val", usedate).removeClass("datepicker-error-format").focus();
     }
     //显示年份div
     function showYearLayer() {
